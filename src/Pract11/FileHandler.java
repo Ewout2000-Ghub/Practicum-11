@@ -3,6 +3,7 @@ package Pract11;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -23,7 +24,15 @@ public class FileHandler {
 
         Scanner waardeScanner = new Scanner(System.in);
         System.out.println("Geef de waarde van 1 USD in eurocenten: ");
-        double waarde = Double.parseDouble(waardeScanner.nextLine());
+        double waarde;
+
+        try {
+            waarde = waardeScanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Vul een geldige waarde in!");
+            return;
+        }
+
         double wisselkoers = waarde / 100;
 
         // Try-catch voor het inlezen van USDArtikelen.txt
